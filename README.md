@@ -52,7 +52,7 @@ powershell -ExecutionPolicy Bypass -File ".\Disable-WebSearch_Validate.ps1" -Res
 
 ## 🧹 Clean Project – Remove Cache / Build Artifacts
 
-**Script:** `clean-project.ps1`
+**Script:** `clean-python-project.ps1`
 
 Cleans Python project directories from cache/build artifacts.
 By default, it **skips `.venv` and `venv`**, so your environment stays intact.
@@ -72,19 +72,19 @@ By default, it **skips `.venv` and `venv`**, so your environment stays intact.
 Dry run (safe preview):
 
 ```powershell
-.\clean-project.ps1 -WhatIf
+.\clean-python-project.ps1 -WhatIf
 ```
 
 Actual cleanup:
 
 ```powershell
-.\clean-project.ps1
+.\clean-python-project.ps1
 ```
 
 Also clean inside `.venv`:
 
 ```powershell
-.\clean-project.ps1 -IncludeVenv
+.\clean-python-project.ps1 -IncludeVenv
 ```
 
 ### 📁 Output
@@ -101,7 +101,7 @@ Also clean inside `.venv`:
 
 ## 🧩 Combine Python Files – Single Text Export
 
-**Script:** `combine-python.ps1`
+**Script:** `combine-python-files.ps1`
 
 Combines all `.py` files in the project (recursively) into a single text file.
 Useful for audits, backups, or quick searches.
@@ -115,7 +115,7 @@ Useful for audits, backups, or quick searches.
 ### ▶️ Usage
 
 ```powershell
-.\combine-python.ps1
+.\combine-python-files.ps1
 ```
 
 ### 📁 Output
@@ -131,7 +131,7 @@ Useful for audits, backups, or quick searches.
 
 ## 🌲 Project Structure Export
 
-**Script:** `project-structure.ps1`
+**Script:** `project-phython_structure.ps1`
 
 Generates a tree view (`ASCII`) of the project folder structure.
 
@@ -147,13 +147,13 @@ Generates a tree view (`ASCII`) of the project folder structure.
 Default:
 
 ```powershell
-.\project-structure.ps1
+.\project-phython_structure.ps1
 ```
 
 Write output in project root:
 
 ```powershell
-.\project-structure.ps1 -ToRoot
+.\project-phython_structure.ps1 -ToRoot
 ```
 
 ### 📁 Output
