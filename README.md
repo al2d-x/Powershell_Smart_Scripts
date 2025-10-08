@@ -1,61 +1,175 @@
-# 🛑 Disable Web Search – Start Menu Cleanup
+# 🧰 PowerShell Utility Scripts
+
+A small collection of reliable PowerShell scripts for system and project maintenance.
+Each script is **self-contained**, **PS5+ compatible**, and **safe to inspect before execution**.
+
+---
+
+## 🔍 Disable Web Search – Start Menu Cleanup
+
 **Script:** `Disable-WebSearch_Validate.ps1`
 
-Disables Bing/web search & Cortana suggestions in the Windows Start Menu (HKCU)  
-*Deaktiviert Bing-Websuche & Cortana-Vorschläge im Windows-Startmenü (HKCU)*
+Disables Bing/Web search & Cortana suggestions in the Windows Start Menu (`HKCU`).
+*Deaktiviert Bing-Websuche & Cortana-Vorschläge im Windows-Startmenü (HKCU).*
 
----
+### 📄 Features
 
-## 📄 Features
-- Sets registry keys:
-  - `BingSearchEnabled`
-  - `CortanaConsent`
-  - `DisableSearchBoxSuggestions`
-- Verifies registry values ("SHOULD vs. ACTUAL")
-- Optionally restarts `explorer.exe`
-- Logs to: `%USERPROFILE%\Downloads\websearch.log`
+* Sets registry keys:
 
----
+  * `BingSearchEnabled`
+  * `CortanaConsent`
+  * `DisableSearchBoxSuggestions`
+* Verifies registry values (“SHOULD vs. ACTUAL”)
+* Optionally restarts `explorer.exe`
+* Logs to: `%USERPROFILE%\Downloads\websearch.log`
 
-## 📂 Installation
-Place the script in your **Downloads** folder:  
-`%USERPROFILE%\Downloads`
+### ▶️ Usage (EN)
 
----
+```powershell
+cd "$env:USERPROFILE\Downloads"
+powershell -ExecutionPolicy Bypass -File ".\Disable-WebSearch_Validate.ps1" -RestartExplorer
+```
 
-## ▶️ Usage (EN)
-1. Download the file and ensure it's in your **Downloads** folder
-2. Open **PowerShell as Administrator**
-3. Run the following commands:
+### ▶️ Nutzung (DE)
 
-   ```powershell
-   cd "$env:USERPROFILE\Downloads"
-   powershell -ExecutionPolicy Bypass -File ".\Disable-WebSearch_Validate.ps1" -RestartExplorer
-   ```
+```powershell
+cd "$env:USERPROFILE\Downloads"
+powershell -ExecutionPolicy Bypass -File ".\Disable-WebSearch_Validate.ps1" -RestartExplorer
+```
 
----
+### 📁 Log Output
 
-## ▶️ Nutzung (DE)
-1. Lade die Datei herunter und stelle sicher, dass sie im **Downloads-Ordner** liegt
-2. Öffne **PowerShell als Administrator**
-3. Führe folgende Befehle aus:
-
-   ```powershell
-   cd "$env:USERPROFILE\Downloads"
-   powershell -ExecutionPolicy Bypass -File ".\Disable-WebSearch_Validate.ps1" -RestartExplorer
-   ```
-
----
-
-## 📁 Log Output
-Ergebnisse werden gespeichert unter:  
 `%USERPROFILE%\Downloads\websearch.log`
 
+### 🧠 Notes | Hinweise
+
+* 🪟 Windows 10 & 11 supported
+* 👤 Affects only the current user (HKCU)
+* ♻️ Safe to run multiple times
+* 🌐 No internet connection required
+
 ---
 
-## 🧠 Notes | Hinweise
-- 🪟 Windows 10 & 11 supported  
-- 👤 Affects **only the current user (HKCU)**  
-- ♻️ Safe to run multiple times  
-- 🌐 No internet connection or extra tools needed
+## 🧹 Clean Project – Remove Cache / Build Artifacts
 
+**Script:** `clean-project.ps1`
+
+Cleans Python project directories from cache/build artifacts.
+By default, it **skips `.venv` and `venv`**, so your environment stays intact.
+
+### 📄 Features
+
+* Removes:
+
+  * `__pycache__`, `.pytest_cache`, `.ruff_cache`, `build`, `dist`, `*.egg-info`, etc.
+* Deletes compiled Python files (`*.pyc`, `*.pyo`, etc.)
+* Generates a detailed **timestamped report**
+* `-WhatIf` mode for dry-runs
+* Optional `-IncludeVenv` to also clean inside virtual environments
+
+### ▶️ Usage
+
+Dry run (safe preview):
+
+```powershell
+.\clean-project.ps1 -WhatIf
+```
+
+Actual cleanup:
+
+```powershell
+.\clean-project.ps1
+```
+
+Also clean inside `.venv`:
+
+```powershell
+.\clean-project.ps1 -IncludeVenv
+```
+
+### 📁 Output
+
+`maintenance\clean-report-YYYYMMDD-HHmmss.txt`
+
+### 🧠 Notes
+
+* Works with **Python**, **Node**, or hybrid projects
+* Logs deleted paths and warnings
+* Does not require admin rights
+
+---
+
+## 🧩 Combine Python Files – Single Text Export
+
+**Script:** `combine-python.ps1`
+
+Combines all `.py` files in the project (recursively) into a single text file.
+Useful for audits, backups, or quick searches.
+
+### 📄 Features
+
+* Merges all `.py` files into `maintenance\combined_python.txt`
+* Skips virtual environments and cache folders (`.venv`, `.git`, `__pycache__`)
+* Automatically opens the result in Notepad
+
+### ▶️ Usage
+
+```powershell
+.\combine-python.ps1
+```
+
+### 📁 Output
+
+`maintenance\combined_python.txt`
+
+### 🧠 Notes
+
+* No code execution — text only
+* Safe for sharing source snapshots
+
+---
+
+## 🌲 Project Structure Export
+
+**Script:** `project-structure.ps1`
+
+Generates a tree view (`ASCII`) of the project folder structure.
+
+### 📄 Features
+
+* Saves to `maintenance\project-structure.txt` by default
+* Use `-ToRoot` to write the file into the project root
+* Skips common development folders (`.git`, `.venv`, `build`, `dist`, `node_modules`)
+* Fully PS5-compatible, ASCII-safe (no box-drawing characters)
+
+### ▶️ Usage
+
+Default:
+
+```powershell
+.\project-structure.ps1
+```
+
+Write output in project root:
+
+```powershell
+.\project-structure.ps1 -ToRoot
+```
+
+### 📁 Output
+
+`maintenance\project-structure.txt`
+or (with `-ToRoot`) → `project-structure.txt` in the project root.
+
+### 🧠 Notes
+
+* Ideal for quick documentation
+* Output is plain UTF-8 text
+
+---
+
+## 💡 General Recommendations
+
+* Always **run scripts directly** with `.\ScriptName.ps1` (PowerShell does not run from current dir by default).
+* Review source before use — all scripts are **commented, offline-safe**, and **transparent**.
+* Tested with PowerShell 5.1 and 7.x.
