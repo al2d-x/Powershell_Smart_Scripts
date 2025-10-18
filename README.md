@@ -50,6 +50,44 @@ powershell -ExecutionPolicy Bypass -File ".\Disable-WebSearch_Validate.ps1" -Res
 
 ---
 
+## ⚙️ Install PowerShell 7 + .NET 8 Runtime / SDK
+
+**Script:** `setup-pwsh7-dotnet8.ps1`
+
+Installs or updates the latest **PowerShell 7**, **.NET 8 Runtime** (for running apps), and **.NET 8 SDK** (for building projects).
+Automatically checks existing versions, performs idempotent installs via **winget**, and logs detailed output.
+
+### 📄 Features
+
+* Installs or upgrades:
+
+  * `Microsoft.PowerShell` (7.x)
+  * `Microsoft.DotNet.Runtime.8`
+  * `Microsoft.DotNet.SDK.8`
+* Verifies current versions and executable paths
+* Logs full transcript to `%ProgramData%\SetupLogs\setup-pwsh-dotnet8_YYYYMMDD-HHMMSS.log`
+* Exits safely if not run as Administrator
+
+### ▶️ Usage
+
+```powershell
+cd "$env:USERPROFILE\Downloads"
+powershell -ExecutionPolicy Bypass -File ".\setup-pwsh7-dotnet8.ps1"
+```
+
+### 📁 Log Output
+
+`%ProgramData%\SetupLogs\setup-pwsh-dotnet8_YYYYMMDD-HHMMSS.log`
+
+### 🧠 Notes
+
+* 🪟 Requires Windows 10/11 with **winget** available
+* 👑 Must be run as Administrator (script will abort otherwise)
+* ♻️ Safe to run multiple times — upgrades only if newer versions exist
+* 🌐 Uses only official Microsoft sources
+
+---
+
 ## 🧹 Clean Project – Remove Cache / Build Artifacts
 
 **Script:** `clean-python-project.ps1`
