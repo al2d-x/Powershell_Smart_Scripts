@@ -205,6 +205,44 @@ Write to project root:
 
 ---
 
+## NetChecker (Router/Internet/WLAN)
+
+**Script:** `newWindowsInstall\netchecker.ps1`
+
+Launches a small multi-window network check for local router reachability, internet reachability, and current WLAN interface status.
+
+### What it does
+
+* Resolves router host `speedport.ip` (with fallback to `192.168.2.1`)
+* Opens a dedicated `cmd` window for continuous router ping (`ping -t`)
+* Opens a dedicated `cmd` window for continuous internet ping (`ping -t 1.1.1.1`)
+* Opens a dedicated `cmd` window showing `netsh wlan show interfaces`
+* Tracks opened windows by process ID for reliable cleanup
+* Provides a launcher menu to keep windows open or close all NetChecker windows
+
+### Usage
+
+From the project root:
+
+```powershell
+.\newWindowsInstall\netchecker.ps1
+```
+
+Optional (dot-source style):
+
+```powershell
+. .\newWindowsInstall\netchecker.ps1
+```
+
+### Notes
+
+* Designed for Windows
+* No admin rights required for basic checks
+* Safe to rerun
+* Closing option `[2]` closes only windows started by this script run
+
+---
+
 ## Recommendations
 
 * Run scripts from the current directory with:
