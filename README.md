@@ -28,7 +28,7 @@ Disables Bing/web search and Cortana suggestions in the Windows Start Menu for t
 ```powershell
 cd "$env:USERPROFILE\Downloads"
 powershell -ExecutionPolicy Bypass -File ".\Disable-WebSearch_Validate.ps1" -RestartExplorer
-````
+```
 
 ### Notes
 
@@ -76,6 +76,45 @@ powershell -ExecutionPolicy Bypass -File ".\setup-pwsh7-dotnet8.ps1"
 * Must be run as Administrator
 * Can be run multiple times safely
 * Uses official Microsoft packages only
+
+---
+
+## New PC Setup (All-in-One)
+
+**Script:** `newWindowsInstall\newPc.ps1`
+
+Runs an all-in-one first-time setup for a Windows machine: disables Bing/web results in Start/Search and installs or upgrades a core tool set.
+
+### What it does
+
+* Requires Administrator rights
+* Verifies `winget` is available
+* Sets `HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search\BingSearchEnabled` to `0`
+* Installs or upgrades:
+  * `Microsoft.PowerShell`
+  * `Microsoft.DotNet.Runtime.8`
+  * `Microsoft.DotNet.SDK.8`
+  * `voidtools.Everything`
+  * `AntibodySoftware.WizTree`
+* Verifies package presence after install/upgrade
+* Prints final status for `pwsh` and `.NET`
+* Writes a transcript log to `%ProgramData%\SetupLogs\new-pc-setup_YYYYMMDD-HHMMSS.log`
+
+### Usage
+
+From the project root:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File ".\newWindowsInstall\newPc.ps1"
+```
+
+### Notes
+
+* Requires Windows 10 or 11
+* Requires `winget` (Microsoft App Installer)
+* Must be run as Administrator
+* Can be rerun safely to keep packages up to date
+* Bing Search setting is per-user (`HKCU`)
 
 ---
 
